@@ -14,11 +14,9 @@
 				$Url .= "&sentence=".urlencode($obj->item->$i->title);
 				$Xml  = simplexml_load_file($Url);
 				$result["title"]["$i"] = '<a href="'.$obj->item->$i->link.'">'.$obj->item->$i->title.'</a><br>';
-				//echo $this->Html->tag("br");
 				$result["key"]["$i"] = "キーワード:";
 				foreach ($Xml->Result as $cur) {
         			$result["key"]["$i"] .= $cur->Keyphrase." ";
-        			//echo $this->Html->tag("br");
     			}
     			$result["key"]["$i"] .= "<br>";
 			}

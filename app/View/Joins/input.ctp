@@ -12,13 +12,7 @@
 	echo $this->Html->tag("br");
 	echo "学年";
 	echo $this->Html->tag("br");
-	echo $this->Form->select("User_rank",
-		array(
-		"学部1年"=>"学部1年",
-		"学部2年"=>"学部2年",
-		"学部3年"=>"学部3年",
-		"学部4年"=>"学部4年"),
-		array("default"=>"学部2年"));
+	echo $this->Form->select("User_rank",array("学部1年"=>"学部1年","学部2年"=>"学部2年","学部3年"=>"学部3年","学部4年"=>"学部4年"),array("default"=>"学部2年"));
 	echo $this->Html->tag("br");
 	echo "好きなもの";
 	echo $this->Html->tag("br");
