@@ -10,8 +10,8 @@ CakePHP
 
 [実行結果](http://49.212.46.130/~g031k151/cake/mushups/)
 
-
-
 [基礎課題６－３](https://github.com/MJunki/g031k151/blob/master/app/Controller/JoinsController.php)
 
 [実行結果](http://49.212.46.130/~g031k151/cake/Joins/input)
+
+[発展課題１](http://49.212.46.130/~g031k151/6-1.PNG)
