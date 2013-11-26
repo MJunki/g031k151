@@ -9,7 +9,7 @@
 		}	
 		public function edit($data_edit){
 			if(!empty($data_edit)){
-				$data["Board"]["id"] = $data_edit["board"]["pass"];
+				$data["Board"]["id"] = $data_edit["board"]["id"];
 				$data["Board"]["comment"] = $data_edit["board"]["comment"];
 				$this->save($data);
 			}
