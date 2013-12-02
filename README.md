@@ -3,6 +3,10 @@ CakePHP
 
 演習課題
 =======
+[基礎課題9－１](https://github.com/MJunki/g031k151/blob/master/app/Controller/BoardsController.php)[実行結果](http://49.212.46.130/~g031k151/cake/boards/login)
+
+[基礎課題9－2]()
+
 
 [基礎課題7－１](https://github.com/MJunki/g031k151/blob/master/app/Controller/BoardsController.php)[実行結果](http://49.212.46.130/~g031k151/cake/boards)
 

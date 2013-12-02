@@ -1,9 +1,11 @@
 <?php
 	class Board extends Model{
 		public $name = 'Board';
+		public $belongsTo = array('User');
 		public function add($data_add){
 			if(!empty($data_add)){
 				$data["Board"]["comment"] = $data_add["board"]["comment"];
+				$data["Board"]["user_id"] = $data_add["board"]["user_id"];
 				$this->save($data);
 			}
 		}	
