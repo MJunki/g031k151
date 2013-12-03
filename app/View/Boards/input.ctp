@@ -2,7 +2,7 @@
 	if(!isset($data_input)){
 		echo $this->Form->create("board",array("action"=>"input"));
 		echo "投稿内容";
-		echo $this->Form->textarea("comment");
+		echo $this->Form->textarea("comment",array('required'=>true));
 		echo $this->Form->hidden("id",array("value"=>$user_id));
 		echo $this->Form->submit("投稿する");
 		echo $this->Form->end();

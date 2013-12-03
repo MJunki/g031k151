@@ -19,7 +19,7 @@
 		            )
 		        );
 		public function beforeFilter(){
-             $this->Auth->allow('login','logout','useradd');
+             $this->Auth->allow('login'/*,'logout'*/,'useradd');
              $this->set('user',$this->Auth->user()); 
         }
 		public function index(){
@@ -35,13 +35,12 @@
 		}
 		public function input(){
 			if(isset($this->request->params["pass"][0])){
-					$this->set('user_id',$this->request->params["pass"][0]);
-				}
-				if(isset($this->request->data["board"]["comment"])){
-					$this->set("data_input",$this->request->data["board"]["comment"]);
-					$this->set('data_id',$this->request->data["board"]["id"]);
-				}
-
+				$this->set('user_id',$this->request->params["pass"][0]);
+			}
+			if(isset($this->request->data["board"]["comment"])){
+				$this->set("data_input",$this->request->data["board"]["comment"]);
+				$this->set('data_id',$this->request->data["board"]["id"]);
+			}
 			
 		}
 		public function updata(){
@@ -66,9 +65,14 @@
 			$this->redirect("index");
 		}
 		public function login(){
+			$h=$this->Session->read('logon');
+			if(isset($h)){
+        		$this->redirect(array('action' => 'index'));
+        	}
             if($this->request->is('post')){
                 if($this->Auth->login()){
                     $this->Session->delete('Auth.redirect');
+                    $this->Session->write('logon','on');
                     return $this->redirect($this->Auth->redirect());
                 }else{
                     $this->Session->setFlash(__('ユーザ名かパスワードが違います'), 'default', array(), 'auth');
@@ -84,13 +88,20 @@
         }
  
         public function useradd(){
+        	$h=$this->Session->read('logon');
+			if(isset($h)){
+        		$this->redirect(array('action' => 'index'));
+        	}
             if($this->request->is('post')) {
-                $this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
-                $this->request->data['User']['pass_check'] = AuthComponent::password($this->request->data['User']['pass_check']);
                 if($this->request->data['User']['pass_check'] == $this->request->data['User']['password']){   
-                    $this->User->create();
+                	$this->User->set($this->request->data);
                     if(!$this->User->findByName($this->request->data['User']['name'])){
-                		$mse = ($this->User->save($this->request->data))? '新規ユーザーを追加しました' : 'ユーザ名がおかしいです。パスワードも入力しなおしてください。';
+                    	if($this->User->validates()){
+                    		$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
+               				$this->request->data['User']['pass_check'] = AuthComponent::password($this->request->data['User']['pass_check']);
+               				$this->User->create();
+                			$mse = ($this->User->save($this->request->data))? '新規ユーザーを追加しました' : 'ユーザ名がおかしいです。パスワードも入力しなおしてください。';
+                		}
                	 	}else{
             			$mse ='その名前は既に使用されています';
             		}
@@ -104,7 +115,7 @@
 	            	}elseif($mse=='新規ユーザーを追加しました'){
 	            		$this->redirect(array('action' => 'login'));
 	            	}elseif($mse ='その名前は既に使用されています'){
-	            		$this->redirect(array('action' => 'useradd'));
+	            		//$this->redirect(array('action' => 'useradd'));
 	            	}
            		}
             }

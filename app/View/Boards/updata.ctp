@@ -2,7 +2,7 @@
 	if(!isset($data_updata)){
 		echo $this->Form->create("board",array("action"=>"updata"));
 		echo "編集";
-		echo $this->Form->textarea("comment",array("value"=>$data["Board"]["comment"]));
+		echo $this->Form->textarea("comment",array("value"=>$data["Board"]["comment"],'required'=>true));
 		echo $this->Form->hidden("id",array("value"=>$data["Board"]["id"]));
 		echo $this->Form->submit("投稿する");
 		echo $this->Form->end();
