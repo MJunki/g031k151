@@ -7,7 +7,7 @@
                 'rule' => array('custom', '/^[a-z]{1,10}$/i'),
                 'required' => true,
                 'alloEmpty' => false,
-                'message' => '10文字以内で必ず入力して下さい'
+                'message' => '半角英字10文字以内で必ず入力して下さい'
             ),
             'email' => array(
                 'rule' => 'email',

@@ -90,7 +90,7 @@
                 if($this->request->data['User']['pass_check'] == $this->request->data['User']['password']){   
                     $this->User->create();
                     if(!$this->User->findByName($this->request->data['User']['name'])){
-                		$mse = ($this->User->save($this->request->data))? '新規ユーザーを追加しました' : '登録できませんでした。やり直して下さい';
+                		$mse = ($this->User->save($this->request->data))? '新規ユーザーを追加しました' : 'ユーザ名がおかしいです。パスワードも入力しなおしてください。';
                	 	}else{
             			$mse ='その名前は既に使用されています';
             		}
@@ -99,8 +99,8 @@
            		}
                 if(isset($mse)){
                 	$this->Session->setFlash(__($mse));
-	                if($mse=="登録できませんでした。やり直して下さい"){  
-	                	$this->redirect(array('action' => 'useradd'));
+	                if($mse=="ユーザ名がおかしいです。パスワードも入力しなおしてください。"){  
+	                	//$this->redirect(array('action' => 'useradd'));
 	            	}elseif($mse=='新規ユーザーを追加しました'){
 	            		$this->redirect(array('action' => 'login'));
 	            	}elseif($mse ='その名前は既に使用されています'){

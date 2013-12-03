@@ -22,4 +22,5 @@
 		echo "<br><br>";
 		$i++;
 	}
+	echo $this->Html->link("過去ログ一覧","index/")."<br>";
 ?>
