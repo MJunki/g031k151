@@ -1,4 +1,8 @@
 <?php
+	if(isset($user['NewUser'])){
+		$user['name']=$user['NewUser']['username'];
+		$user['id']=$user['NewUser']['id'];
+	}
 	echo $this->Session->flash('Auth');
 	echo "<h2>掲示板</h2>";
 	echo "<h3>".$user['name']."さん！ようこそ！</h3>";
@@ -17,7 +21,11 @@
 	echo $this->Form->end();
 	$i=1;
 	foreach ($data as $board) {
-		echo "$i.UserName: ".$board['User']['name']."[".$board['User']['email']."]<br>";
+		if(isset($board['User']['name'])){
+			echo "$i.UserName: ".$board['User']['name']."[".$board['User']['email']."]<br>";
+			}else{
+				echo "$i.UserName: ".$board['NewUser']['username']."[".$board['User']['email']."]<br>";
+			}
 		echo $board["Board"]["comment"]."[".$board["Board"]["modified"]."]";
 		if($user['id']==$board['Board']['user_id']){
 			echo $this->Html->link("編集","updata/".$board["Board"]["id"]).$this->Html->link("×","del/".$board["Board"]["id"]);

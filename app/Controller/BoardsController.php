@@ -3,6 +3,7 @@
 		public $name = 'Boards';
 		public $uses = array('Board','User');
 		public $layout = 'Board';
+		public $helpers = array('Facebook.Facebook');
 		public $components = array(
 		            'DebugKit.Toolbar', 
 		            'Auth' => array( 
@@ -120,5 +121,6 @@
            		}
             }
         }
+        
 	}
 ?>

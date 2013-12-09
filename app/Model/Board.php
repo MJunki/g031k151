@@ -1,7 +1,7 @@
 <?php
 	class Board extends Model{
 		public $name = 'Board';
-		public $belongsTo = array('User');
+		public $belongsTo = array('User','NewUser'=>array(/*'className'=>'NewUser',*/'foreignKey'=>'user_id'));
 		public $validate = array(
             'comment' => array(
                 'rule' => 'notEmpty',
