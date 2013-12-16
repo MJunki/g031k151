@@ -5,6 +5,8 @@
     class FbconnectsController extends AppController {
         public $name = 'Fbconnects';
         public $uses = array('NewUser');
+        //public $layout = 'jqm';
+        public $layout = 'Board';
         public $helpers = array('Facebook.Facebook');
         public $components = array(
                     'DebugKit.Toolbar', 
@@ -24,6 +26,11 @@
         public function beforeFilter(){//login処理の設定
                  $this->Auth->allow('index', 'facebook', 'fbpost','createFacebook');
                  $this->set('user',$this->Auth->user()); // ctpで$userを使えるようにする 。
+                 if($this->request->is('mobile')){
+                     //テーマをJqm、レイアウトをjqmに指定します。
+                     $this->theme = 'Jqm';
+                     $this->layout = 'jqm';
+                 }
             }
         public function index(){}
      
@@ -32,7 +39,7 @@
             $myFbData = $this->Session->read('mydata');//facebookのデータ
             //$myFbData_kana = $this->Session->read('fbdata_kana'); //フリガナ
             //pr($myFbData_kana); //フリガナデータ表示
-            pr($myFbData);//表示
+            //pr($myFbData);//表示
             //$this->fbpost("hello world");//facebookに投稿
         }
      
@@ -49,6 +56,7 @@
                 // mb_convert_variables('UTF-8', 'auto', $me_kana);
                 // $this->Session->write('fbdata_kana',$me_kana);//フリガナデータをセッションに保存
             //}
+                //debug($this->Session->read('mydata'));
                 $data = $this->NewUser->signinfb($this->Session->read('mydata'));
                 if($this->Auth->login($data)){
                     return $this->redirect($this->Auth->redirect());

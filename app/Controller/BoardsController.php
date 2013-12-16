@@ -2,6 +2,7 @@
 	class BoardsController extends AppController {
 		public $name = 'Boards';
 		public $uses = array('Board','User');
+		//public $layout = 'jqm';
 		public $layout = 'Board';
 		public $helpers = array('Facebook.Facebook');
 		public $components = array(
@@ -22,6 +23,11 @@
 		public function beforeFilter(){
              $this->Auth->allow('login'/*,'logout'*/,'useradd');
              $this->set('user',$this->Auth->user()); 
+             if($this->request->is('mobile')){
+				 //テーマをJqm、レイアウトをjqmに指定します。
+				 $this->theme = 'Jqm';
+				 $this->layout = 'jqm';
+			 }
         }
 		public function index(){
 			if(!isset($this->request->data['board'])){

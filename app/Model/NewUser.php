@@ -31,8 +31,8 @@
         }
         public function signinfb($token){
             //アクセストークンを正しく取得できなかった場合の処理
+            //debug($token);
             if(is_string($token))return; //エラー
-
             $data['username'] = $token['name'];
             $data['email'] = $token['email'];
             $data['id'] = $token['id'];
